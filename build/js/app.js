@@ -3,8 +3,6 @@ function Time(alarm) {
   this.alarm = alarm;
  }
 
-
-
 Time.prototype.alarmTime = function () {
   var currentTime = (moment().format('H:mm'));
 
@@ -14,23 +12,28 @@ Time.prototype.alarmTime = function () {
   console.log(currentTime);
   console.log(this.alarm);
 };
-setInterval(1000);
-
-
 exports.timeModule = Time;
 
 },{}],2:[function(require,module,exports){
 var Time = require('./../js/time.js').timeModule;
 
+// function update() {
+//  $('#time').text(moment().format('H:mm:ss'));
+// }
+// setInterval(update, 1000);
+
 $(document).ready(function(){
-  $('#time').text(moment().format('H:mm'));
   $("#new-item").submit(function(event) {
     event.preventDefault();
     var alarm = $('#alarm').val();
     var newAlarm = new Time (alarm);
     newAlarm.alarmTime();
-    $('.output').prepend("<h2>alarm submitted</h2>");
+    $('.output').prepend("<h2>alarm set for: " + alarm);
   });
+  function update() {
+   $('#time').text(moment().format('hh:mm:ss'));
+  }
+  setInterval(update, 1000);
 });
 
 },{"./../js/time.js":1}]},{},[2]);

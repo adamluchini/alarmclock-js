@@ -2,8 +2,6 @@ function Time(alarm) {
   this.alarm = alarm;
  }
 
-
-
 Time.prototype.alarmTime = function () {
   var currentTime = (moment().format('H:mm'));
 
@@ -13,7 +11,4 @@ Time.prototype.alarmTime = function () {
   console.log(currentTime);
   console.log(this.alarm);
 };
-setInterval(1000);
-
-
 exports.timeModule = Time;
