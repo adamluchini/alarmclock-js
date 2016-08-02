@@ -6,15 +6,20 @@ var Time = require('./../js/time.js').timeModule;
 // setInterval(update, 1000);
 
 $(document).ready(function(){
+  var newAlarm = new Time();
   $("#new-item").submit(function(event) {
     event.preventDefault();
-    var alarm = $('#alarm').val();
-    var newAlarm = new Time (alarm);
-    newAlarm.alarmTime();
-    $('.output').prepend("<h2>alarm set for: " + alarm);
+    newAlarm.setAlarm($('#alarm').val());
+    // var alarm = $('#alarm').val();
+    $('.output').prepend("<h2>alarm set for: " + newAlarm.alarm);
+    console.log(newAlarm.alarm);
   });
+
   function update() {
    $('#time').text(moment().format('hh:mm:ss'));
+   newAlarm.checkAlarm(moment().format('HH:mm'));
+   return update;
   }
-  setInterval(update, 1000);
+  setInterval(update(), 1000);
+
 });
