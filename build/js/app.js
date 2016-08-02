@@ -3,16 +3,17 @@ function Time(alarm) {
   this.alarm = alarm;
  }
 
-var currentTime = (moment().format('hh:mm'));
 
-Time.prototype.alarmTime = function (alarm) {
-  if (alarm === currentTime) {
+
+Time.prototype.alarmTime = function () {
+  var currentTime = (moment().format('H:mm'));
+
+  if (this.alarm === currentTime) {
     alert("Wakie wakie eggs and bacey");
   }
-
+  console.log(currentTime);
+  console.log(this.alarm);
 };
-console.log(currentTime);
-
 setInterval(1000);
 
 
@@ -22,14 +23,13 @@ exports.timeModule = Time;
 var Time = require('./../js/time.js').timeModule;
 
 $(document).ready(function(){
-  $('#time').text(moment().format('hh:mm'));
+  $('#time').text(moment().format('H:mm'));
   $("#new-item").submit(function(event) {
     event.preventDefault();
     var alarm = $('#alarm').val();
-    console.log(alarm);
     var newAlarm = new Time (alarm);
-    var alertTime = newAlarm.alarmTime(alarm);
-    $('.output').prepend("<h2>the alarm is going off</h2>");
+    newAlarm.alarmTime();
+    $('.output').prepend("<h2>alarm submitted</h2>");
   });
 });
 
